@@ -97,9 +97,9 @@ class CubePick:
         if not self.enable_pixels:
             raise ValueError("Cameras are not enabled. Set `enable_pixels=True` when creating the environment.")
         return self.cam
+
     def step(self, action):
-        self.so_101.control_dofs_position(action[:5], self.motors_dof)
-        self.so_101.control_dofs_position(action[5:], self.fingers_dof)
+        self.so_101.control_dofs_position(action[0])
         self.scene.step()
         reward = self.compute_reward()
         obs = self.get_obs()

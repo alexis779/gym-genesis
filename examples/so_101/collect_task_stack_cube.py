@@ -224,7 +224,7 @@ agent_shape = (8,)
 action_shape = (6,)
 env_shape = (14,)
 dataset_path = Path("data/stack_cube")
-lerobot_dataset = LeRobotDataset.create(
+lerobot_dataset : LeRobotDataset = LeRobotDataset.create(
     repo_id=None,
     root=dataset_path,
     robot_type="so101",
@@ -302,8 +302,8 @@ for ep in range(10):
                 "observation.image.top": obs["pixels"]["top"],
                 "observation.image.side": obs["pixels"]["side"],
                 "observation.image.wrist": obs["pixels"]["wrist"],
-            },
-            task="pick up the red cube and place it on top of the green cube",)
+                "task": "pick up the red cube and place it on top of the green cube",
+            })
 
             rewards_arr.append(reward)
 

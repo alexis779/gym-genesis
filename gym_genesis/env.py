@@ -58,10 +58,11 @@ class GenesisEnv(gym.Env):
     
     def push(self):
         self._env.scene.step()
+
     def step(self, action):
         _, reward, _, observation = self._env.step(action)
         is_success = (reward == 1)
-        terminated = is_success.detach().cpu().numpy().astype(bool)
+        terminated = is_success#.detach().cpu().numpy().astype(bool)
         truncated = np.zeros(self.num_envs, dtype=bool)  # All False
 
         info = {"is_success": is_success} #todo: add tolist

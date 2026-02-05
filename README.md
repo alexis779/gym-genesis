@@ -14,6 +14,7 @@ Install gym-genesis:
 git clone https://github.com/huggingface/gym-genesis.git
 cd gym-genesis
 pip install -e . # or pip install -e .[lerobot]
+git submodule update --init --recursive
 ```
 
 ## Quickstart
@@ -49,3 +50,22 @@ imageio.mimsave("example.mp4", np.stack(frames), fps=25)
 
 The input and outputs of the environment are not numpy arrays, but rather based on torch tensors with the first dimension being the number of environment instances.
 
+
+
+## Scripts
+
+### Demo
+
+Load the robot in genesis. It showcases some of the UI shortcuts available
+- rotate the camera
+- reset the camera
+- display the world frame
+- display the link frames
+- display the camera frustum
+- etc.
+
+<video controls src="https://github.com/user-attachments/assets/50620174-dc52-44d1-9b7b-fb66f31fa088" />
+
+```bash
+python demo.py
+```

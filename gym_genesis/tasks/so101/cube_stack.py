@@ -44,6 +44,7 @@ class CubeStackOne:
         self.fingers_dof = np.array([5])      # gripper
         self.eef = self.so_101.get_link("gripper")
 
+
     def _make_obs_space(self):
         #TODO: see if we should add text obs
         if self.enable_pixels:

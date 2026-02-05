@@ -255,13 +255,16 @@ def genesis_house():
     scene = gs.Scene(
         sim_options=gs.options.SimOptions(dt=0.002, substeps=20),
         viewer_options=viewer_options,
-        show_viewer=False,
+        show_viewer=True,
         rigid_options=gs.options.RigidOptions(
             gravity=(0, 0, -9.8),
             enable_collision=True,
         ),
         sph_options=gs.options.SPHOptions(
             particle_size=0.002, lower_bound=(-0.3, -0.3, 0.65), upper_bound=(0.3, 0.3, 1.3)
+        ),
+        profiling_options = gs.options.ProfilingOptions(
+            show_FPS       = False,
         ),
         # renderer=gs.renderers.RayTracer(
         #     env_radius=200.0,

@@ -44,7 +44,10 @@ class FrankaCubePickBatch:
             ),
             sim_options=gs.options.SimOptions(dt=0.01),
             rigid_options=gs.options.RigidOptions(box_box_detection=True),
-            show_viewer=False,
+            show_viewer=True,
+            profiling_options = gs.options.ProfilingOptions(
+                show_FPS       = False,
+            ),
         )
 
         self.plane = self.scene.add_entity(gs.morphs.Plane())

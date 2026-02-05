@@ -252,9 +252,12 @@ def build_house(self, num_envs, env_spacing):
             sim_options=gs.options.SimOptions(dt=0.01),
             rigid_options=gs.options.RigidOptions(box_box_detection=True),
             viewer_options=viewer_options,
-            show_viewer=False,
+            show_viewer=True,
             vis_options=gs.options.VisOptions(
                 show_world_frame=False  # ✅ This disables the world frame XYZ arrows
+            ),
+            profiling_options = gs.options.ProfilingOptions(
+                show_FPS       = False,
             ),
         )
 
@@ -441,11 +444,14 @@ def build_house_task_cube_pick(self):
             sim_options=gs.options.SimOptions(dt=0.01),
             rigid_options=gs.options.RigidOptions(box_box_detection=True),
             viewer_options=viewer_options,
-            show_viewer=False,
+            show_viewer=True,
             vis_options=gs.options.VisOptions(
                 show_world_frame=True  # disables the world frame XYZ arrows
             ),
-        )
+            profiling_options = gs.options.ProfilingOptions(
+                show_FPS       = False,
+            ),
+    )
 
     kitchen_floor_path = os.path.join(blenderkit_dir, "87bfcd24-98cb-4d2e-a8a0-57c3484a0503/Color.jpg")
     kitchen_wall_path = os.path.join(
@@ -587,7 +593,19 @@ def build_house_task_cube_pick(self):
         material=gs.materials.Rigid()
     )
 
+    if self.enable_pixels:
+        self.cam = self.scene.add_camera(
+            res=(self.observation_width, self.observation_height),
+            pos=(3.5, 0.0, 2.5),
+            lookat=(0, 0, 0.5),
+            fov=30,
+            GUI=False
+        )
+
     self.scene.build()
+
+    if self.enable_pixels:
+        self.cam.start_recording()
 
 
 def build_house_task_cube_stack(self, num_envs=0, env_spacing=0):
@@ -606,11 +624,14 @@ def build_house_task_cube_stack(self, num_envs=0, env_spacing=0):
             sim_options=gs.options.SimOptions(dt=0.01),
             rigid_options=gs.options.RigidOptions(box_box_detection=True),
             viewer_options=viewer_options,
-            show_viewer=False,
+            show_viewer=True,
             vis_options=gs.options.VisOptions(
                 show_world_frame=False  # ✅ This disables the world frame XYZ arrows
             ),
-        )
+            profiling_options = gs.options.ProfilingOptions(
+                show_FPS       = False,
+            ),
+    )
 
 
 
@@ -788,7 +809,19 @@ def build_house_task_cube_stack(self, num_envs=0, env_spacing=0):
         )
         self.distractor_cubes.append(cube)
 
+    if self.enable_pixels:
+        self.cam = self.scene.add_camera(
+            res=(self.observation_width, self.observation_height),
+            pos=(3.5, 0.0, 2.5),
+            lookat=(0, 0, 0.5),
+            fov=30,
+            GUI=False
+        )
+
     if num_envs > 0:
         self.scene.build(n_envs=num_envs, env_spacing=env_spacing)
     else:
         self.scene.build()
+
+    if self.enable_pixels:
+        self.cam.start_recording()
